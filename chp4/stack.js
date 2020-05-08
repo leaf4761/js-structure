@@ -1,25 +1,25 @@
 class Stack {
     constructor() {
-        this.count = 0
-        this.items = {}
+        this._count = 0
+        this._items = {}
     }
 
     push(element) {
-        this.items[this.count++] = element
+        this._items[this._count++] = element
     }
 
     size(){
-        return this.count
+        return this._count
     }
 
     isEmpty() {
-        return this.count === 0
+        return this._count === 0
     }
 
     pop() {
         if(!this.isEmpty()){
-            const item = this.items[--this.count]
-            delete this.items[this.count]
+            const item = this._items[--this._count]
+            delete this._items[this._count]
             return item
         }
         return null
@@ -27,23 +27,23 @@ class Stack {
 
     peek(){
         if(!this.isEmpty()){
-            return this.items[this.count - 1]
+            return this._items[this._count - 1]
         }
         return null
     }
 
     clear() {
-        this.items = {}
-        this.count = 0
+        this._items = {}
+        this._count = 0
     }
 
     toString(){
         if(this.isEmpty()){
             return ''
         }
-        let str = `${this.items[0]}`
-        for(let i = 1; i < this.count; i++){
-            str = `${str}, ${this.items[i]}`
+        let str = `${this._items[0]}`
+        for(let i = 1; i < this._count; i++){
+            str = `${str}, ${this._items[i]}`
         }
         return str
     }
@@ -55,4 +55,4 @@ console.log(stack)
 
 console.log(Object.getOwnPropertyNames(stack))
 console.log(Object.keys(stack))
-console.log(stack.items)
+console.log(stack._items)
