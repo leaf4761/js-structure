@@ -1,33 +1,35 @@
+const _items = Symbol('stackItems')
+
 class Stack {
     constructor() {
-        this.items = []
+        this[_items] = []
     }
 
     push(element) {
-        this.items.push(element)
+        this[_items].push(element)
     }
 
     pop() {
-        return this.items.pop()
+        return this[_items].pop()
     }
 
     peek(){
         if(!this.isEmpty()){
-            return this.items[this.items.length - 1]
+            return this[_items][this[_items].length - 1]
         }
         return null
     }
 
     isEmpty(){
-        return this.items.length === 0
+        return this[_items].length === 0
     }
 
     clear() {
-        this.items = []
+        this[_items] = []
     }
 
     size() {
-        return this.items.length
+        return this[_items].length
     }
 }
 
@@ -49,3 +51,5 @@ stack.pop()
 stack.pop()
 console.log(stack.size())
 console.log(stack)
+
+module.exports = Stack

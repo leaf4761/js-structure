@@ -1,11 +1,16 @@
+const _items = Symbol('stackItems')
+const items1 = Symbol('stackItems')
+
+console.log(_items === items1)
+
 class Stack {
     constructor() {
         this._count = 0
-        this._items = {}
+        this[_items] = {}
     }
 
     push(element) {
-        this._items[this._count++] = element
+        this[_items][this._count++] = element
     }
 
     size(){
@@ -18,8 +23,8 @@ class Stack {
 
     pop() {
         if(!this.isEmpty()){
-            const item = this._items[--this._count]
-            delete this._items[this._count]
+            const item = this[_items][--this._count]
+            delete this[_items][this._count]
             return item
         }
         return null
@@ -27,13 +32,13 @@ class Stack {
 
     peek(){
         if(!this.isEmpty()){
-            return this._items[this._count - 1]
+            return this[_items][this._count - 1]
         }
         return null
     }
 
     clear() {
-        this._items = {}
+        this[_items] = {}
         this._count = 0
     }
 
@@ -41,9 +46,9 @@ class Stack {
         if(this.isEmpty()){
             return ''
         }
-        let str = `${this._items[0]}`
+        let str = `${this[_items][0]}`
         for(let i = 1; i < this._count; i++){
-            str = `${str}, ${this._items[i]}`
+            str = `${str}, ${this[_items][i]}`
         }
         return str
     }
@@ -55,4 +60,8 @@ console.log(stack)
 
 console.log(Object.getOwnPropertyNames(stack))
 console.log(Object.keys(stack))
-console.log(stack._items)
+console.log(stack[_items])
+
+console.log(Object.getOwnPropertySymbols(stack))
+
+module.exports = Stack
